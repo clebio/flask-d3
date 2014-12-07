@@ -1,3 +1,25 @@
 #d3 {
 	border: 1px solid grey;
 }
+
+h1, p {
+	margin: 20px;
+}
+
+text {
+  font: bold 48px monospace;
+}
+
+.enter {
+  fill: none;
+  stroke: green;
+}
+
+.update {
+  stroke: green;
+  fill: darkblue;
+}
+
+.exit {
+  fill: brown;    
+}

@@ -1,8 +1,16 @@
-var data = ["a", "b", "c", ];
+var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+
+var data = [];
+for (i = 0; i < 10; i++) {
+  letter = alphabet[Math.floor(Math.random() * 26)]
+  data.unshift(letter)
+}
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
   width = 600 - margin.left - margin.right,
   height = 600 - margin.top - margin.bottom;
+
+spacing = width / data.length;
 
 var x = d3.scale.ordinal()
   .domain(data)
@@ -13,27 +21,58 @@ var y = d3.scale.ordinal()
   .domain(data)
   .rangePoints([0, height], 1)
 ;
-
 var svg = d3.select("#d3")
   .append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
 ;
 
-svg.selectAll("circles")
-  .data(data)
-  .enter()
-  .append("svg:circle")
-  .attr("cx", function(i) { return x(i); })
-  .attr("cy", function(i) { return y(i); })
-  .attr("r", 10)
-  .attr("width", 50)
-  .attr("height", 50)
-  .style("stroke", "steelblue")
-  .style("fill", "none")
-  .style("stroke-width", "4px")
-;
+function update(set) {
 
-setTimeout(function() {
-      // Do something after 5 seconds
-}, 5000);
+  var text = svg.selectAll("text")
+    .data(set, function(d) { return d; })
+  ;
+
+  text.attr("class", "update")
+    .transition()
+    .duration(750)
+    .attr("x", function(d, i) { return i * spacing; })
+    .attr("y", height/2);
+  ;
+
+  text.enter().append("text")
+    .attr("class", "enter")
+    .attr("x", function(d, i) { return i * spacing; })
+    .attr("y", margin.top + 48)
+  ;
+
+  text.text(function(d) { return d; });
+
+  text.exit()
+    .attr("class", "exit")
+    .transition()
+    .duration(750) 
+    .attr("x", function(d, i) { return i * spacing; })
+    .attr("y", height)
+    .remove()
+  ;
+
+}
+
+function add_data(set, count) {
+
+  for (var i = 0; i < count; i++) {
+    index = Math.floor(Math.random() * set.length)
+    letter = alphabet[Math.floor(Math.random() * 26)]
+    set[index] = letter
+  }
+  return set;
+}
+
+setInterval(function() {
+    data = add_data(data, 3);
+    console.info(data);
+    update(data);
+}, 2000);
+
+update(data);
