@@ -13,3 +13,7 @@ This package has one dependency, `Flask`, so to use it, I recommend using `virtu
 The project creates a Flask app. The `app.py` file is the entry-point and is executable. To start it, run:
 
 	./app.py
+
+## Asynchronous
+
+This setup can run updates asynchronously. Use javascript's `setTimeout()` or some such functionality.
