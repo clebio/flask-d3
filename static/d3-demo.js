@@ -71,7 +71,6 @@ function add_data(set, count) {
 
 setInterval(function() {
     data = add_data(data, 3);
-    console.info(data);
     update(data);
 }, 2000);
 
