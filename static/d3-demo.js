@@ -51,7 +51,7 @@ function update(set) {
   text.exit()
     .attr("class", "exit")
     .transition()
-    .duration(750) 
+    .duration(750)
     .attr("x", function(d, i) { return i * spacing; })
     .attr("y", height)
     .remove()
@@ -59,18 +59,13 @@ function update(set) {
 
 }
 
-function add_data(set, count) {
-
-  for (var i = 0; i < count; i++) {
-    index = Math.floor(Math.random() * set.length)
-    letter = alphabet[Math.floor(Math.random() * 26)]
-    set[index] = letter
-  }
-  return set;
-}
-
 setInterval(function() {
-    data = add_data(data, 3);
+    $.getJSON('/_get_letters', {
+	dataset: data.join(""),
+	replace: 3,
+    }, function(dataset) {
+	data = dataset.result.split("")
+    });
     update(data);
 }, 2000);
 
