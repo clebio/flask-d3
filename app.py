@@ -16,13 +16,11 @@ def letter_replace():
     data = list(request.args.get('dataset', alphabet,type=str))
     replace = request.args.get('replace', 3, type=int)
 
-    for i in range(replace):
-        index = random.randint(1, len(data)) - 1
-        letter = alphabet[int(random.random() * 25)]
-        data[index] = letter
+    indices = range(len(data))
+    random.shuffle(indices)
+    for index in indices[:replace]:
+        data[index] = alphabet[int(random.random() * 25)]
     return jsonify(result=''.join(data))
-
-
 
 
 if __name__ == '__main__':

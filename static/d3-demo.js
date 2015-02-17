@@ -44,6 +44,7 @@ function update(set) {
     .attr("class", "enter")
     .attr("x", function(d, i) { return i * spacing; })
     .attr("y", margin.top + 48)
+      .style("fill-opacity", 1)
   ;
 
   text.text(function(d) { return d; });
@@ -52,8 +53,8 @@ function update(set) {
     .attr("class", "exit")
     .transition()
     .duration(750)
-    .attr("x", function(d, i) { return i * spacing; })
     .attr("y", height)
+    .style("fill-opacity", 1e-6)
     .remove()
   ;
 

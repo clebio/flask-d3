@@ -11,15 +11,13 @@ text {
 }
 
 .enter {
-  fill: none;
-  stroke: green;
+  fill: green;
 }
 
 .update {
-  stroke: green;
   fill: darkblue;
 }
 
 .exit {
-  fill: brown;    
+  fill: brown;
 }
